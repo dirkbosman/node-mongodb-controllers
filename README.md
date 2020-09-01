@@ -1,9 +1,11 @@
 # node-mongodb-controllers
 
+A (Destructured) Express Node MongoDB App w. Controllers
+
 #### Summary:
 
 - node express server, middleware and apis
-- postgresql relational database
+- mongodb non-relational database
 
 #### Boilerplates:
 
