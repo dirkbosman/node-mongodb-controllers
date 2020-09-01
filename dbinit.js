@@ -1,7 +1,16 @@
-const { Pool } = require('pg')
+const mongoose = require("mongoose");
 
-const pool = new Pool()
+const connectDB = async () => {
+  const options = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: true,
+    useUnifiedTopology: true,
+  };
 
-module.exports = {
-  query: (text, params) => pool.query(text, params)
-}
+  const conn = await mongoose.connect(process.env.MONGO_URI, options);
+
+  console.log(`Mongo DB connected ${conn.connection.host}`);
+};
+
+module.exports = connectDB;
