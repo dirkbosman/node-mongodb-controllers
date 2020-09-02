@@ -14,6 +14,19 @@ A (Destructured) Express Node MongoDB App w. Controllers & Mongoose-ORM integrat
 - [Part 3: node-postgresql-controllers](https://github.com/dirkbosman/node-postgresql-controllers)
 - [Part 4: node-mongodb-controllers](https://github.com/dirkbosman/node-mongodb-controllers)
 
+### MongoDB & Mongoose
+
+If you your Mongo Atlas server ha been corrently set-up (follow the Mongo Atlas Onboarding tut), you can create an `.env`-file with your connection details and try to connect. If you run `npm start` and you get the output below, you have successfully made a connection from your local environment. Note that you might have to set/reset your IP up for this to work (maybe even more than once).
+```
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node server.js`
+connected
+Mongo DB connected cluster0-shard-50-60.xxxx.mongodb.net
+```
+
 ### Add Models
 
 ```
