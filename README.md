@@ -17,6 +17,7 @@ A (Destructured) Express Node MongoDB App w. Controllers & Mongoose-ORM integrat
 ### MongoDB & Mongoose
 
 If you your Mongo Atlas server ha been corrently set-up (follow the Mongo Atlas Onboarding tut), you can create an `.env`-file with your connection details and try to connect. If you run `npm start` and you get the output below, you have successfully made a connection from your local environment. Note that you might have to set/reset your IP up for this to work (maybe even more than once).
+
 ```
 [nodemon] 2.0.4
 [nodemon] to restart at any time, enter `rs`
@@ -190,10 +191,33 @@ curl -X DELETE http://localhost:3000/users/${id}
 curl -X DELETE http://localhost:3000/users/5f4d7587bf290843cc1e7f95
 ```
 
+#### Connecting two MongoDB-collections
+
+Relationships in the traditional sense don’t really exist in MongoDB like they do in MySQL ([Source](https://vegibit.com/mongoose-relationships-tutorial/)). In other words, related data is not explicitly enforced by MongoDB, but you can map to two (or more) collections. The strategy we will follow for setting up a request to get order from a specific user is, create an `Orders`-model, and then user that order model in the `Users`-controller (and not in the orders' controller).
+
+After creating this code, you can go ahead and test it in the browser or in the terminal:
+
+```
+curl http://localhost:3000/users/5f5004d9713aed0a426bb060 | jq .
+curl http://localhost:3000/users/5f5004d9713aed0a426bb060/orders | jq .
+```
+
+To further extend the code, we can also add a filter in the getUserOrders-route to answer this next questions:
+
+- i.e. give me all orders less than 2000 euros
+
+Test it in the terminal:
+
+```
+curl http://localhost:3000/users/5f5004d9713aed0a426bb060/orders/?price[lte]=2000 | jq .
+curl http://localhost:3000/users/5f5004d9713aed0a426bb060/orders/?price[gt]=2000 | jq .
+```
+
+An interesting follow-up question could be: How do you make the connection between `userId` and `_id` and not another collection's `userId` within the same model? Furthermore, if you delete a user_id, what happens with all the records from that userId? i.e. all the orders of that user.
+
+- You don't really define a foreign key in NoSQL normally, but you can if you really want to intercept requests and check if the id is from an existing userId or not, but you would want to do this at the application layer (not db layer). This is one of the difference with explicitly defining a schema vs not.
+- You could think about explicitly defining it in the Mongoose-[schema](https://mongoosejs.com/docs/guide.html), or think about adding another field in the users-collection with name "active" and status true or false, and then toggle between them.
+
 ## Future Suggestions
 
-### One to many mappings between tables:
-
-- You won't have a foreign key in mongoDB, just an entry on the order with the user_id.
-- If you want both you'd do another find on orders for specific users, or find all and then connect to users
-- Unless you want orders to be part of the users, but I wouldn't go that way
+- We only discusses about connecting collections in the same db, what about if I want to connect collections in two different mongo dbs? i.e. Creating two DBs (`operations` and `analytics`) so you run aggregated queries against your operations into analytics db on a daily, weekly, monthly basis.
