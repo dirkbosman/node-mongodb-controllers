@@ -225,12 +225,14 @@ An interesting follow-up question could be: How do you make the connection betwe
 
 For the next step to work, you will need to download, install and initialise both of the two repos separately below. Note, you can combine both in one repo if you wish :)
 
-node-mongodb-controllers
-- Run server on port: 8000;
-
 node-mongodb-clientforserver
+- Installed axios on client's side to handle apis. Run: `npm i axios`
 - Run server on different port: 3000 and connect
 - Currently I still have the Contentful details to connect to, but you can take that out and purely connect to the mongoDB to extract data from. So you will have to replace the ".env"-data with connection data to your server and mongodb. 
+
+node-mongodb-controllers
+- Installed cors on server's side, because you want to be able to give cross domain access and accept requests from headers with certain type. Run: `npm i cors`
+- Run server on port: 8000;
 
 
 ## Future Suggestions
