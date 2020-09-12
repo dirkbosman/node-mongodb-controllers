@@ -12,7 +12,9 @@ A (Destructured) Express Node MongoDB App w. Controllers & Mongoose-ORM integrat
 - [Part 1: node-postgresql-unstructured](https://github.com/dirkbosman/node-postgresql-unstructured)
 - [Part 2: node-postgresql-destructured](https://github.com/dirkbosman/node-postgresql-destructured)
 - [Part 3: node-postgresql-controllers](https://github.com/dirkbosman/node-postgresql-controllers)
-- [Part 4: node-mongodb-controllers](https://github.com/dirkbosman/node-mongodb-controllers)
+---
+- [Part 4a: node-mongodb-controllers](https://github.com/dirkbosman/node-mongodb-controllers)
+- Part 4b: Combine [node-mongodb-clientforserver](https://github.com/dirkbosman/node-mongodb-clientforserver) + [node-mongodb-controllers](https://github.com/dirkbosman/node-mongodb-controllers)
 
 ### MongoDB & Mongoose
 
@@ -217,6 +219,19 @@ An interesting follow-up question could be: How do you make the connection betwe
 
 - You don't really define a foreign key in NoSQL normally, but you can if you really want to intercept requests and check if the id is from an existing userId or not, but you would want to do this at the application layer (not db layer). This is one of the difference with explicitly defining a schema vs not.
 - You could think about explicitly defining it in the Mongoose-[schema](https://mongoosejs.com/docs/guide.html), or think about adding another field in the users-collection with name "active" and status true or false, and then toggle between them.
+
+
+#### Combine `node-mongodb-clientforserver` and `node-mongodb-controllers`
+
+For the next step to work, you will need to download, install and initialise both of the two repos separately below. Note, you can combine both in one repo if you wish :)
+
+node-mongodb-controllers
+- Run server on port: 8000;
+
+node-mongodb-clientforserver
+- Run server on different port: 3000 and connect
+- Currently I still have the Contentful details to connect to, but you can take that out and purely connect to the mongoDB to extract data from. So you will have to replace the ".env"-data with connection data to your server and mongodb. 
+
 
 ## Future Suggestions
 
